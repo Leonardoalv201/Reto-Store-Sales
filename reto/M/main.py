@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
-import M.leo as leo
+import leo as leo
 
 app = Flask(_name_)
 
