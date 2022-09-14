@@ -15,7 +15,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
-    alert(inputs.nbr_store_input+inputs.family_input+inputs.onpromotion_input+inputs.its_holiday);
+    alert("/?store="+inputs.nbr_store_input+"&family="+inputs.family_input+"&onpromotion="+inputs.onpromotion_input+"&its_holiday="+inputs.its_holiday);
   }
 
   return <>
