@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import pandas as pd
 import leo as leo
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
@@ -17,7 +17,8 @@ def hello_world():
 
   print(nbr_store_input, family_input, onpromotion_input, its_holiday)
   
-  pred = leo.predict(pd.DataFrame([[nbr_store_input, family_input, onpromotion_input, its_holiday]], columns=['store_nbr', 'family', 'onpromotion', 'type']))
+  pred = leo.predict(pd.DataFrame([[1, 1, 1, 1]], columns=['store_nbr', 'family', 'onpromotion', 'type']))
   return jsonify({"prediction": pred.tolist()})
-
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
 # leo.train()
