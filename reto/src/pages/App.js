@@ -1,11 +1,24 @@
 import '../assets/App.css';
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
 import Contexto from '../components/Contexto';
 
 function App() {
-  const [predict, setPredict] = useState(0);
+  const [predict, setPredict] = useState();
+  const [URL, setURL] = useState(null);
   const [inputs, setInputs] = useState({});
 
+  const getApiData = async () => {
+    const response = await fetch(
+      URL
+    ).then((response) => response.json());
+    // update the state
+    setPredict(response.prediction[0]);
+  };
+
+  useEffect(() => {
+    getApiData()
+  }, [URL]);
+  
   const handleChange = (event) => {
     const id = event.target.id;
     const value = event.target.value;
@@ -14,8 +27,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputs);
-    alert("/?store="+inputs.nbr_store_input+"&family="+inputs.family_input+"&onpromotion="+inputs.onpromotion_input+"&its_holiday="+inputs.its_holiday);
+    setURL("http://localhost:3001/?store="+inputs.nbr_store_input+"&family="+inputs.family_input+"&onpromotion="+inputs.onpromotion_input+"&its_holiday="+inputs.its_holiday)
   }
 
   return <>
